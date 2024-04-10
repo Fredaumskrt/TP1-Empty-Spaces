@@ -28,17 +28,17 @@ conseguimos reduzir o desperdício de espaço e otimizar a utilização dos recu
 Os critérios estabelecidos para o reaproveitamento dos espaços vazios garantem um equilíbrio entre eficiência e complexidade do sistema.
 
 1 - O que você considerou como perda aceitável para o reuso de espaços vazios, isto é, quais são os critérios para a gestão dos espaços vazios?
-R:
+R: Quando ocorre uma exclusão de registro, o offset correspondente ao registro excluído é adicionado à lista de espaços livres. Para a inclusão de um novo registro, o código busca na lista de espaços vazios um espaço que seja adequado para o novo registro, ou então, caso não encontre, insere o novo registro no final do arquivo.
 2 - O código do CRUD com arquivos de tipos genéricos está funcionando corretamente? 
 R: Sim, está funcionando conforme o modelo fornecedido pelo professor!
 3 - O CRUD tem um índice direto implementado com a tabela hash extensível?
-R:
+R: Sim, o código implementa um índice direto utilizando uma tabela hash extensível. A classe Arquivo possui um atributo indiceDireto do tipo HashExtensivel<ParIDEndereco>, que é utilizado para mapear os IDs dos registros para os seus respectivos endereços no arquivo. Isso permite acessar diretamente os registros a partir de seus IDs.
 4 - A operação de inclusão busca o espaço vazio mais adequado para o novo registro antes de acrescentá-lo ao fim do arquivo?
-R:
+R: Sim, a operação de inclusão busca na lista de espaços vazios um espaço que seja adequado para o novo registro antes de acrescentá-lo ao fim do arquivo. Isso é feito no método create da classe Arquivo, onde é chamado o método encontraEspacosVazios para encontrar um espaço livre adequado para o novo registro.
 5 - A operação de alteração busca o espaço vazio mais adequado para o registro quando ele cresce de tamanho antes de acrescentá-lo ao fim do arquivo?
-R:
+R: sim, a operação de alteração busca o espaço vazio mais adequado para o registro quando ele cresce de tamanho antes de acrescentá-lo ao fim do arquivo. Isso é feito no método update da classe Arquivo, onde é chamado o método encontraEspacosVazios para encontrar um espaço livre adequado para o registro atualizado. Se o novo tamanho do registro for maior que o tamanho do espaço livre encontrado, o registro é escrito no final do arquivo.
 6 - As operações de alteração (quando for o caso) e de exclusão estão gerenciando os espaços vazios para que possam ser reaproveitados?
-R:
+R: sSim, as operações de alteração e exclusão estão gerenciando os espaços vazios para que possam ser reaproveitados. Quando ocorre uma exclusão, o offset correspondente ao registro excluído é adicionado à lista de espaços livres. Na operação de alteração, se o novo tamanho do registro for maior que o tamanho do espaço livre encontrado, o registro é escrito no final do arquivo e o espaço ocupado pelo registro antigo é marcado como livre.
 7 - O trabalho está funcionando corretamente?
 R: Sim, tirando a parte de hash que nos retorna 'null'
 8 - O trabalho está completo?
